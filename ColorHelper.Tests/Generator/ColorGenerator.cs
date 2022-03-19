@@ -39,7 +39,7 @@ namespace ConsoleHelper.Tests
             var result = ColorGenerator.GetRandomColor<HSL>();
             Assert.NotNull((HSL)result);
         }
-        
+
         [Test]
         public void GetRandomColorXyz()
         {
@@ -62,6 +62,34 @@ namespace ConsoleHelper.Tests
         public void GetDarkRandomColor()
         {
             var result = ColorGenerator.GetDarkRandomColor<RGB>();
+            Assert.That(result.R, Is.LessThanOrEqualTo(80));
+            Assert.That(result.G, Is.LessThanOrEqualTo(80));
+            Assert.That(result.B, Is.LessThanOrEqualTo(80));
+        }
+
+        [Test]
+        [Repeat(100)]
+        public void GetRandomColorExact()
+        {
+            var result = ColorGenerator.GetRandomColorExact<RGB>("helloworld".GetHashCode());
+            Assert.NotNull((RGB)result);
+        }
+
+        [Test]
+        [Repeat(100)]
+        public void GetRandomColorExactLight()
+        {
+            var result = ColorGenerator.GetRandomColorExact<RGB>("helloworld".GetHashCode(), ColorGenerator.ColorThemesEnum.Light);
+            Assert.That(result.R, Is.GreaterThanOrEqualTo(170));
+            Assert.That(result.G, Is.GreaterThanOrEqualTo(170));
+            Assert.That(result.B, Is.GreaterThanOrEqualTo(170));
+        }
+
+        [Test]
+        [Repeat(100)]
+        public void GetRandomColorExactDark()
+        {
+            var result = ColorGenerator.GetRandomColorExact<RGB>("helloworld".GetHashCode(), ColorGenerator.ColorThemesEnum.Dark);
             Assert.That(result.R, Is.LessThanOrEqualTo(80));
             Assert.That(result.G, Is.LessThanOrEqualTo(80));
             Assert.That(result.B, Is.LessThanOrEqualTo(80));

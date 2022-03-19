@@ -2,46 +2,73 @@
 
 namespace ColorHelper
 {
-    public static class ColorGenerator
+    public static partial class ColorGenerator
     {
         public static T GetRandomColor<T>() where T: IColor
         {
-            return GetRandomColor<T>(new RgbRandomColorFilter());
+            return GetRandomColor<T>(GetColorFilter(ColorThemesEnum.Default));
         }
 
         public static T GetLightRandomColor<T>() where T : IColor
         {
-            const byte minRangeValue = 170;
-
-            RgbRandomColorFilter filter = new RgbRandomColorFilter();
-            filter.minR = minRangeValue;
-            filter.minG = minRangeValue;
-            filter.minB = minRangeValue;
-
-            return GetRandomColor<T>(filter);
+            return GetRandomColor<T>(GetColorFilter(ColorThemesEnum.Light));
         }
 
         public static T GetDarkRandomColor<T>() where T : IColor
         {
+            return GetRandomColor<T>(GetColorFilter(ColorThemesEnum.Dark));
+        }
+
+        public static T GetRandomColorExact<T>(int hashCode, ColorThemesEnum colorTheme = ColorThemesEnum.Default) where T : IColor
+        {
+            return GetRandomColorExact<T>(hashCode, GetColorFilter(colorTheme));
+        }
+
+        private static RgbRandomColorFilter GetColorFilter(ColorThemesEnum colorTheme)
+        {
             const byte maxRangeValue = 80;
+            const byte minRangeValue = 170;
 
             RgbRandomColorFilter filter = new RgbRandomColorFilter();
-            filter.maxR = maxRangeValue;
-            filter.maxG = maxRangeValue;
-            filter.maxB = maxRangeValue;
 
-            return GetRandomColor<T>(filter);
+            switch (colorTheme)
+            {
+                case ColorThemesEnum.Default:
+                    break;
+                case ColorThemesEnum.Light:
+                    filter.minR = minRangeValue;
+                    filter.minG = minRangeValue;
+                    filter.minB = minRangeValue;
+                    break;
+                case ColorThemesEnum.Dark:
+                    filter.maxR = maxRangeValue;
+                    filter.maxG = maxRangeValue;
+                    filter.maxB = maxRangeValue;
+                    break;
+            }
+
+            return filter;
         }
 
         private static T GetRandomColor<T>(RgbRandomColorFilter filter) where T : IColor
         {
             Random random = new Random(DateTime.Now.Millisecond);
+            return GetRandomColor<T>(filter, random);
+        }
 
+        private static T GetRandomColorExact<T>(int hashCode, RgbRandomColorFilter filter) where T : IColor
+        {
+            Random random = new Random(DateTime.Now.Millisecond + hashCode);
+            return GetRandomColor<T>(filter, random);
+        }
+
+        private static T GetRandomColor<T>(RgbRandomColorFilter filter, Random random) where T : IColor
+        {
             RGB rgb = new RGB(
                 (byte)random.Next(filter.minR, filter.maxR),
                 (byte)random.Next(filter.minG, filter.maxG),
                 (byte)random.Next(filter.minB, filter.maxB));
-            
+
             return ConvertRgbToNecessaryColorType<T>(rgb);
         }
 
