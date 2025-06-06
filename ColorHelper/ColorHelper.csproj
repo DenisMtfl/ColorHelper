@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Artyom Gritsuk</Authors>
     <RepositoryUrl>https://github.com/iamartyom/ColorHelper</RepositoryUrl>
     <PackageProjectUrl>https://github.com/iamartyom/ColorHelper</PackageProjectUrl>
-    <PackageTags>Color, Converter, RGB, HEX, CMYK, HSV, HSL, XYZ</PackageTags>
-    <PackageReleaseNotes>Fix issue of black not being returned correctly for HSV HSL and another minor changes.</PackageReleaseNotes>
+    <PackageTags>Color, Converter, RGB, HEX, CMYK, HSV, HSL, XYZ, YIQ, YUV</PackageTags>
+    <PackageReleaseNotes>Update HslToRgb method</PackageReleaseNotes>
     <Description>This library contains several useful classes:
 
 - ColorConverter
@@ -16,31 +16,57 @@ RgbToCmyk
 RgbToHsv
 RgbToHsl
 RgbToXyz
+RgbToYuv
+RgbToYiq
 HexToRgb
 HexToCmyk
 HexToHsv
 HexToHsl
 HexToXyz
+HexToYuv
+HexToYiq
 CmykToRgb
 CmykToHex
 CmykToHsv
 CmykToHsl
 CmykToXyz
+CmykToYuv
+CmykToYiq
 HsvToRgb
 HsvToHex
 HsvToCmyk
 HsvToHsl
 HsvToXyz
+HsvToYuv
+HsvToYiq
 HslToRgb
 HslToHex
 HslToCmyk
 HslToHsv
 HslToXyz
+HslToYuv
+HslToYiq
 XyzToRgb
 XyzToHex
 XyzToCmyk
 XyzToHsv
 XyzToHsl
+XyzToYuv
+XyzToYiq
+YiqToRgb
+YiqToHex
+YiqToCmyk
+YiqToHsv
+YiqToHsl
+YiqToXyz
+YiqToYuv
+YuvToRgb
+YuvToHex
+YuvToCmyk
+YuvToHsv
+YuvToHsl
+YuvToXyz
+YuvToYiq
 
 - ColorComparer
 
@@ -55,9 +81,9 @@ Enums
 - ColorName</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.6.2</Version>
+    <Version>1.8.1</Version>
     <PackageIcon>logo.jpg</PackageIcon>
-    <PackageVersion>1.6.2</PackageVersion>
+    <PackageVersion>1.8.1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
